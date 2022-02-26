@@ -1,0 +1,72 @@
+<div class="pagehome">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-center mt-2">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <mat-label>To do Input</mat-label>
+            <input matInput [(ngModel)]="text" name="text" #newTodo="ngModel">
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" (click)="addToDo(newTodo.value)">Add</button>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <mat-card class="d-flex">
+          <div class="example-container">
+            <h2>pendings</h2>
+
+            <div cdkDropList #pendingList="cdkDropList" [cdkDropListData]="data.pending"
+              [cdkDropListConnectedTo]="[inProgressList]" class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of data.pending" cdkDrag>
+                <img
+                  src="https://e7.pngegg.com/pngimages/230/277/png-clipart-alarm-clocks-computer-icons-clock-number-timer.png"
+                  alt="">
+                {{item}}
+              </div>
+            </div>
+          </div>
+
+          <div class="example-container">
+            <h2>inProgress</h2>
+
+            <div cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="data.inProgress"
+              [cdkDropListConnectedTo]="[pendingList,doneList]" class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of data.inProgress" cdkDrag>
+                <img
+                  src="https://w7.pngwing.com/pngs/221/641/png-transparent-hourglass-time-hourglass-s-time-website-hourglass.png"
+                  alt="">
+                {{item}}
+              </div>
+            </div>
+          </div>
+
+          <div class="example-container">
+            <h2>tamamlananlar</h2>
+
+            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="data.done"
+              [cdkDropListConnectedTo]="[inProgressList]" class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of data.done" cdkDrag>
+                <img
+                  src="https://w7.pngwing.com/pngs/959/224/png-transparent-thumb-signal-gesture-like-button-symbol-miscellaneous-hand-vector-icons.png"
+                  alt="">
+                {{item}}
+              </div>
+            </div>
+          </div>
+
+        </mat-card>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 d-flex justify-content-center align-items-center mt-2 ">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png"
+          alt="">
+        <a href="https://github.com/YigitCanBolukbasi" class="m-3">Git Hub YigitCanBolukbasi</a>
+      </div>
+    </div>
+  </div>
+</div>
