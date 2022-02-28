@@ -7,7 +7,7 @@
             <mat-label>To do Input</mat-label>
             <input matInput [(ngModel)]="text" name="text" #newTodo="ngModel">
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit" (click)="addToDo(newTodo.value)">Add</button>
+          <button mat-raised-button color="primary" type="submit" (click)="AddToDo(newTodo.value)">Add</button>
         </form>
       </div>
     </div>

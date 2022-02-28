@@ -4,6 +4,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-home',
@@ -24,11 +25,9 @@ export class HomeComponent implements OnInit {
     done: ['Get up', 'Brush teeth', 'Take a shower'],
   };
 
-  constructor() {}
+  constructor(private todoService: TodoService) {}
 
-  ngOnInit(): void {
-    this.setItems();
-  }
+  ngOnInit(): void {}
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -44,25 +43,18 @@ export class HomeComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      Object.keys(this.data).forEach((key) => {
-        localStorage.setItem(key, JSON.stringify(this.data[key]));
-      });
     }
   }
 
-  addToDo(todo: string) {
-    this.data.pending.push(todo);
-    this.text = ' ';
-    localStorage.setItem('pendings', JSON.stringify(this.data.pendings));
-  }
-
-  setItems() {
-    Object.keys(this.data).forEach((key) => {
-      if (!localStorage.getItem(key)) {
-        localStorage.setItem(key, JSON.stringify(this.data[key]));
-      } else {
-        this.data[key] = JSON.parse(localStorage.getItem(key) || '{}');
+  AddToDo(todo: any) {
+    const obj = { todo: todo.value };
+    this.todoService.addTodo(obj).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
       }
-    });
+    );
   }
 }
